@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dashboard-page">
+
+<div class="sidebar">
+    <img src="images/logo.png" class="sidebar-logo">
+    <div class="sidebar-title">EduLeave System</div>
+    <div class="sidebar-date" id="dateText"></div>
+
+    <a href="dashboard_admin.html" class="nav-link active"><i class="fa-solid fa-chart-column nav-fa"></i>Dashboard</a>
+    <a href="profile.html" class="nav-link"><i class="fa-solid fa-user nav-fa"></i>Profile</a>
+ <a href="edit_profile.html" class="nav-link"><i class="fa-solid fa-pen nav-fa"></i>Edit Profile</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-user-graduate nav-fa"></i>Manage Students</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-user-tie nav-fa"></i>Manage Lecturers</a>
+    <a href="#" class="nav-link"><i class="fa-regular fa-file-lines nav-fa"></i>Reports</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-chart-simple nav-fa"></i>Absence Summary</a>
+</div>
+
+<div class="dashboard-main">
+    <div class="topbar">
+        <div class="topbar-name" id="topName"></div>
+
+        <div class="topbar-right">
+            <i class="fa-solid fa-bell"></i>
+            <span>|</span>
+           <a href="login.html" class="logout-link" onclick="logout(event)">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-card">
+            <div class="welcome-box">
+                <h1>Hello Admin!</h1>
+                <p>Monitor system activity and manage records here.</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="left-stats">
+                    <p>Total Students<br>0</p>
+                    <p>Total Lecturers<br>0</p>
+                    <p>Total Applications<br>0</p>
+                    <p>Active Accounts<br>0</p>
+                </div>
+
+                <div>
+                    <div class="right-box">
+                        <h2>Notifications</h2>
+                        <p>• No recent system activity.</p>
+                        <p>• Database running normally.</p>
+                    </div>
+
+                    <div class="right-box">
+                        <h2>System Summary</h2>
+                        <p>Pending Requests : 0</p>
+                        <p>Approved Requests : 0</p>
+                        <p>Rejected Requests : 0</p>
+                    </div>
+
+                    <div class="right-box">
+                        <h2>Recent System Activities</h2>
+                        <p>No activities available yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if(!user){
+    window.location.href = "login.html";
+}
+
+document.getElementById("topName").innerHTML =
+    user.fullName.toUpperCase() + " (ADMIN)";
+
+document.getElementById("dateText").innerHTML =
+    new Date().toLocaleDateString("en-MY", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
+
+function logout(event){
+
+    event.preventDefault();
+
+    localStorage.removeItem("loggedInUser");
+
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
